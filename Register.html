@@ -1,0 +1,372 @@
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="API.WebUI201509.Register" %>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="renderer" content="webkit">
+		<title>Register</title>
+		<link rel="stylesheet" href="/international/css/reset.css" />
+		<link rel="stylesheet" href="/international/css/register.css" />
+		<script type="text/javascript" src="/international/js/jquery-1.11.3.min.js" ></script>
+		<!--<script type="text/javascript" src="/international/js/index.js" ></script>-->
+		<!--<script type="text/javascript" src="/international/js/nicenav.js" ></script>-->
+		<script type="text/javascript" src="/Scripts/secure/RSA.js"></script>
+		<script type="text/javascript" src="/Scripts/secure/BigInt.js"></script>
+		<script type="text/javascript" src="/Scripts/secure/Barrett.js"></script>
+	<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+		<script type="text/javascript">
+
+			
+			function rsapassword(password) {
+			    setMaxDigits(129);
+				key = new RSAKeyPair("<%=strPublicKeyExponent%>", "", "<%=strPublicKeyModulus%>");
+				var encpassword = encryptedString(key, encodeURIComponent(password));
+				return encpassword;
+			}
+		</script>
+		<style>
+			ul.nav li a{
+				color: #aca8a8;
+			}
+			.buoy{
+				background: #413535;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--头部开始-->
+		<div class="wrapper">
+			<div class="nav-box clearfix">
+				<a href="/international/Default.aspx">
+					<img src="img/gray-logo.png" class="fl"/>
+				</a>
+				<!--<div class="Hamburge-menu fr">
+					<div class="Hamburge-menu-icon"></div>
+					<div class="Hamburge-menu-icon"></div>
+					<div class="Hamburge-menu-icon"></div>
+			    </div>-->
+			    <div class="pr navlineBox fr">
+				<ul class="nav fr">
+					<li><a href="login.aspx">Login</a></li>
+					<li><a href="Register.aspx" class="navtop_active">Register</a></li>	
+					<li><a href="Default.aspx">Home</a></li>
+				</ul>
+				<div class="buoy"></div>
+				</div>
+			</div>
+			<!--<div class="sidemenu">
+			<div class="green">x</div>
+			
+				<ul class="hide-nav">
+					<li><a href="#" class="nav_active">Home</a></li>
+					<li><a href="#">Product center</a></li>
+					<li><a href="about-us.html">About us</a></li>
+					<li><a href="#">Contact us</a></li>
+				 </ul>
+			
+		</div>-->
+	</div>
+		<!--头部结束-->
+		
+		<!--主体开始-->
+		<div class="register-box">
+			<div class="register-content clearfix">
+				<ul class="choosebox clearfix">
+					<li class="p-selected" id="c1"><i class="iconfont f28">&#xe600;</i>Individual account</li>
+					<li id="c2"><i class="iconfont f28">&#xe601;</i>Corporate account</li>
+				</ul>
+				<form name="regform" id="regform" action="" method="post" class="registerform clearfix">
+					<input type="hidden" id="userid" name="userid" value="" />
+					<input type="hidden" id="regtype" name="regtype" value="1" />
+					<input type="hidden" id="fromUserId" name="fromUserId" value="<%=fromUserId%>" />
+					<input type="hidden" name="userclass" value="0" id="userclass" class="uclass" />
+					<div class="register-con-left clearfix">
+						<div class="register-text-two small_none">
+							<p class="p1"></p>
+							<p class="p2"></p>
+							<p class="p3"></p>
+						</div>
+						<div class="register-text-one clearfix" style="position:relative;">
+							<div class="register-type phone-register clearfix">
+								<p class="p1">Phone：</p>
+								<p class="p2">
+									<input id="phonelogname" name="phonelogname" type="text" placeholder="Please enter your phone number">
+
+								</p>
+								<span class="p3">
+									<img class="success" style="float:left;" src="/content/themes/index/images/gouxuan01.jpg">
+									or
+									<a class="email-register-btn register-type-btn" href="javascript:void(0)" tabindex="-1">Email</a>
+								</span>
+							</div>
+							<div class="register-type email-register clearfix" style="right:-550px;display:none;">
+								<p class="p1">Email：</p>
+								<p class="p2"><input id="emaillogname" name="emaillogname" type="text"></p>
+								<span class="p3">
+									<img class="success" style="float:left;" src="/content/themes/index/images/gouxuan01.jpg">
+									or
+									<a class="phone-register-btn register-type-btn" href="javascript:void(0)" tabindex="-1">Phone</a>
+								</span>
+							</div>
+						</div>
+						<div class="register-text-two clearfix">
+							<p class="p1"></p>
+							<p class="p2"></p>
+							<p class="p3"></p>
+						</div>
+						<div class="register-text-one clearfix">
+							<p class="p1">Verification code：</p>
+							<p class="p2">
+								<input id="imgcaptchacode" name="imgcaptchacode" type="text">
+
+							</p>
+							<p class="p3"><img class="success" src="/content/themes/index/images/gouxuan01.jpg">
+								<img id="cimg" class="small_cimg" src="/captchacode.ashx" onclick="refreshcaptchacode()" style="display:block;margin-left:10px;width:85px; height:33px; float: left; line-height:33px; text-align:center;" title="看不清？点击更换另一个。" />
+							</p>
+						</div>
+						<div class="register-text-two clearfix">
+							<p class="p1"></p>
+							<p class="p2"></p>
+							<p class="p3"></p>
+						</div>
+						<div class="register-text-one clearfix" style="position: relative;">
+							<div class="register-type phone-register clearfix">
+								<p id="validcodetxt" class="p1">Phone code：</p>
+								<p class="p2">
+									<input id="phonecaptchacode" name="phonecaptchacode" type="text"/>
+
+								</p>
+								<p class="p3"><img class="success" style="display:none;" src="/content/themes/index/images/gouxuan01.jpg">
+									<input id="sendphonecode" type="button" class="send-smscode" value="send">
+								</p>
+							</div>
+							<div class="register-type email-register clearfix" style="right:-550px;display:none;">
+								<p id="validcodetxt" class="p1">Email code：</p>
+								<p class="p2">
+									<input id="emailcaptchacode" name="emailcaptchacode" type="text">
+
+								</p>
+								<p class="p3"><img class="success" style="display:none;" src="/content/themes/index/images/gouxuan01.jpg">
+									<input id="sendemailcode" type="button" class="send-smscode" value="send">
+								</p>
+							</div>
+						</div>
+						<div class="register-text-two clearfix">
+							<p class="p1"></p>
+							<p id="captchacodemsg" class="p2"></p>
+							<p class="p3"></p>
+						</div>
+						<div id="passcheckdiv" class="register-text-three clearfix" style="display:none;">
+							<p class="p1"></p>
+							<p id="passcheck" class="p2" style="position: relative;">
+								<font style="float:left;height:18px;line-height: 18px;color:#3389D6;">Security level：</font>
+								<span>weak</span>
+								<span>normal</span>
+								<span>safety</span>
+								<img id="selectedicon" style="position: absolute;width:10px;" src="/content/themes/index/images/selected.png"></img>
+							</p>
+							<p class="p3"></p>
+						</div>
+						<div class="register-text-one clearfix">
+							<p class="p1">login password：</p>
+							<p class="p2"><input id="logpsw" name="logpsw" type="password" /></p>
+							<p class="p3"><img class="success" style="display:none;" src="/content/themes/index/images/gouxuan01.jpg"></p>
+						</div>
+						<div class="register-text-two clearfix">
+							<p class="p1"></p>
+							<p class="p2"></p>
+							<p class="p3"></p>
+						</div>
+						<div class="register-text-one clearfix">
+							<p class="p1">Confirm password：</p>
+							<p class="p2"><input id="logpsw2" name="logpsw2" type="password" /></p>
+							<p class="p3"><img class="success" src="/content/themes/index/images/gouxuan01.jpg"></p>
+						</div>
+						<div class="register-text-two clearfix">
+							<p class="p1"></p>
+							<p class="p2"></p>
+							<p class="p3"></p>
+						</div>
+						<div class="r_line_checkbox clearfix">
+							<input id="agreenProtocol" name="agreenProtocol" checked="checked" class="line_checkbox" type="checkbox"/>
+							<a href="javascript:openProtocol();" id="agreen_protocol">Agree with "kdpay service agreement"</a>
+						</div>
+						<input type="button" value="complete" id="register-btn" class="btn agreenRegister clearfix" />
+					</div>
+
+				</form>
+			</div>
+		</div>
+		<!--主体结束-->
+		<div class="sd_overlayBG" id="sd_overlay"></div>
+		<div id="cache-config" class="myweb_msg-cache">
+			<a href="javascript:closeProtocol();" class="ks-overlay-close">
+				<span class="icon-font" style="color:black;">×</span>
+			</a>
+			<div class="msg_content">
+				<p style="padding-top:20px; font-size:16px; font-weight:bold; color:#666666;text-align: center;">Protocol</p>
+				<p>User: (hereinafter referred to as Party B)</p>
+				<p class="suojin">Voluntary registration Chongqing Duqi Technology Co., Ltd (Hereinafter referred to as "Party A"), and solemnly declare that it has carefully read and understood the following provisions and agreed to abide by it.</p>
+				<p class="suojin">This registration agreement between the User of KDpay with KDpay.</p>
+				<p class="suojin">The contents of this Agreement shall include the text of the Agreement and all kdpay of various types of rules which have been issued or may be issued in the future. All rules are inseparable part of the agreement, and the agreement has the same legal effect.
+				</p>
+				<p class="suojin">The User agrees and agrees to sign and sign the Agreement as long as the user successfully registers the User as a user by clicking on the "OK" button in the registration form and following the Pocket Payment Registration process, regardless of whether the User has actually read this Agreement before registration.
+				</p>
+				<p class="suojin">
+					This Agreement shall have legal effect between the User and the KDpay. Please be sure to read the full contents of the service agreement before registering. If you have any questions, you can pay for the pocket consultation.
+				</p>
+				<p>1st, the KDpay terms of service agreement is as follows:</p>
+				<p class="suojin">1. Individuals or legal persons who are required to have legal business qualifications;</p>
+				<p class="suojin">2. To equip yourself with Internet access equipment, including personal computers, modems or other essential Internet devices;</p>
+				<p class="suojin">3. To pay their own personal Internet access services associated with the telephone charges, network costs.</p>
+				<p>2nd, based on the importance of the network services provided by Party A, Party B shall agree:</p>
+				<p class="suojin">1. Party B to provide detailed and correct personal information, contact information, and have a legal proof of identity card number or business license number</p>
+				<p class="suojin">2. In the personal information or company information changes, we must promptly change the platform registration information to ensure the accuracy of the information;</p>
+				<p class="suojin">3. Both sides of the agreement will not contain any viruses, camouflage, computer worms, scheduled program bombs or other computer programs that are intentionally destroyed, maliciously interfered with, interception or appropriation of any system, data or personal information;</p>
+				<p>3rd, Party A will not pay Party B's name, address, e-mail address and personal contact information to third parties other than its affiliated companies, except for the following cases:</p>
+				<p class="suojin">1. Party B shall authorize Party A to disclose such information;</p>
+				<p class="suojin">2. The corresponding legal and procedural requirements Party A to provide Party B's registration information;</p>
+				<p class="suojin">If the information provided by Party B contains incorrect contents, Party A reserves the right to terminate Party B's eligibility for using network services.</p>
+				<p>4th , The modify the terms of service and service revision</p>
+				<p class="suojin">Party A has the right to amend the terms of service if necessary, the terms of service of Party A change, will be prompted to modify the important page content. If you do not agree with the contents of the changes, Party B can take the initiative to cancel the network service; if Party B to continue to enjoy network services, is deemed to accept changes in terms of service. Party A reserves the right to modify or discontinue the Service at any time without notice to Party B. Party A shall exercise the right to modify or discontinue the service without Party B or a third party being responsible.</p>
+				<p>5th , Party B's privacy system</p>
+				<p class="suojin">Respecting Party B's personal privacy is a basic policy of Party A. Party A shall not disclose, edit or disclose its registration information and the non-public content stored in Party A without the authorization of Party B, unless Party A has the right to disclose such information in accordance with the law or Party A's integrity In the following four situations are necessary:</p>
+				<p class="suojin">1. comply with the relevant legal provisions, comply with Party A's legal service procedures;</p>
+				<p class="suojin">2. Maintain and maintain Party A's trademark ownership;</p>
+				<p class="suojin">3. in case of emergency efforts to safeguard Party B personal and social privacy and security;</p>
+				<p class="suojin">4. Meet other relevant requirements.</p>
+				<p>6th,Party B's account number, password and security</p>
+				<p class="suojin">Once the registration of Party B is successful, it becomes the legal user of KDpay, and will have an account name and password. Party B shall bear full responsibility for account name and password security. Party B shall not be held responsible for the misuse of the password due to improper management and use by Party B. In addition, each Party B shall be solely responsible for all activities and events carried out under its account name. You can change your password at any time
+				</p>
+				<p>7th,Refuse to provide security</p>
+				<p class="suojin">Party B shall bear the risk of the use of network services. Party A makes no warranty of any kind, either express or implied. Party A does not guarantee the services will meet the requirements of Party B, nor guarantee the service will not be interrupted, the timeliness of the service, security, errors are not guaranteed. Party A shall not guarantee the supply of goods or the transaction process to Party B for any goods received in KDpay.</p>
+				<p>8th, Disclaimer</p>
+				<p class="suojin">KDpay are not liable for any of the following:</p>
+				<p class="suojin">1. Any loss of personal information or financial loss caused by the fault of Party B in communicating the password of the account to others or not keeping his password or sharing the registration account or any other non-KDpay with others.</p>
+				<p class="suojin">2. Any damage caused by a computer problem, hacker attack, computer virus intrusion or attack, technical adjustments in the telecommunication sector, temporary closure due to government regulation, due to third party reasons (including but not limited to force majeure such as trunk link and Pockets of war, violence or similar incidents, etc.) caused by the failure of a telecommunications provider, fire, flood, lightning, earthquake, flood, typhoon, tornado, volcanic eruption, pestilence and infectious disease epidemics, Party B's personal information is disclosed, lost, stolen or tampered with.
+				</p>
+				<p class="suojin">3. Party B provide error, incomplete, false information to KDpay caused by the normal use of KDpay system services or suffer any other losses, nothing to do with KDpay.</p>
+				<p class="suojin">4. In order to the normal operation of the site, the need for regular or irregular maintenance of the site to stop, so the situation caused by the normal service interruption.</p>
+				<p class="suojin">5. Party B expressly agrees that the risks arising from the use of KDpay shall be borne entirely by itself. All the consequences arising from the use of KDpay shall be borne by themselves. Party B shall not bear any responsibility for the KDpay.</p>
+				<p class="suojin">6. If due to the system impact of the KDpay server feedback time inconsistent, and thus bring all the consequences of Party A platform for the delivery of Party B does not bear any responsibility.
+				</p>
+				<p class="suojin">7. Due to service needs, the KDpay will be on a regular basis or from time to time on the functions of the platform or the page to upgrade. If after the upgrade, due to the operation of Party B caused by the habitual loss, KDpay does not bear the corresponding responsibility. Party A platform to upgrade the system before the need to inform or notify the form of Party B. Party A platform will be in the text message or announcement issued, the recognition has been informed Party B;
+				</p>
+				<p class="suojin">8. KDpay provided by the card encryption tool as an aid, if not because of the use of encryption tools, or network problems resulting from card leakage, loss, etc., pocket payment does not bear the corresponding responsibility. Party B has used the encryption tools, but because of Wan card network card leakage, loss or other losses, pocket payment is not responsible.</p>
+				<p class="suojin">9. As a result of the sale of goods of the dispute caused by Party B, by the Party to resolve and assume responsibility, has nothing to do with KDpay.</p>
+				<p class="suojin">10. Due to the Party B has been uploaded to the pocket to pay sales of prepaid card number and password information stored in the wrong card number and password information leakage caused by economic losses,KDpay does not bear corresponding responsibility.
+				</p>
+				<p class="suojin">11. As a result of the sale of virtual goods (including but not limited to: invalid goods, expired merchandise) which upload sales to KDpay by Party B resulting in sales failure, the economic losses incurred by Party B shall be borne by Party B.
+				</p>
+				<p class="suojin">12. Party B must ensure that all products supplied on Party A's platform are obtained through legal channels. Party B platform to prohibit all illegal distribution of the product, once verified, or a user complaint, do title processing, and reported to the public security organs to deal with!
+				</p>
+				<p class="suojin">13. Due to unpredictable factors leading to server hard disk damage, caused by data loss, pocket payment does not bear the corresponding responsibility;</p>
+				<p class="suojin">14. In addition to the circumstances described in the preceding paragraph, pocket payment at the same time remain without prior notice to Party B at any time suspend the suspected B of the cooperation.</p>
+				<p>9th,The storage and restriction of Party B's information</p>
+				<p class="suojin">Party A shall not be responsible for the deletion or storage failure of the information published by Party B. Party A has the right to determine whether Party B 's conduct conforms to the requirements and spirit of Party A' s terms of service. If Party B violates the provisions of the Terms of Service, Party A has the right to suspend its provision of network services and retain Party B 's right to recover damages.</p>
+				<p>10th, Party B must follow:</p>
+				<p class="suojin">1. The transmission of technical information from China shall comply with relevant Chinese laws and regulations.</p>
+				<p class="suojin">2. Use the network service is not for illegal purposes.</p>
+				<p class="suojin">3. Do not interfere with or disrupt network services.</p>
+				<p class="suojin">4.Comply with all network protocols, regulations, procedures and practices that use network services.</p>
+				<p class="suojin">5.Party B shall notify Party A immediately if any illegal use of Party B account or platform security vulnerabilities exist.</p>
+				<p class="suojin">6.Party B shall undertake not to transmit any unlawful, harassing, slanderous, abusive, intimidating, harmful, vulgar, obscene and other information. In addition, Party B shall not transmit any information that incites others to commit a criminal act; it can not transmit information that promotes domestic adverse conditions and national security; it can not transmit any information that does not comply with local laws, national laws and international laws. Unauthorized access to other computer systems is prohibited. If Party B's behavior does not comply with the above-mentioned terms of service, Party A will make an independent judgment to cancel Party B's service account immediately. Party B shall be legally responsible for its own conduct on the Internet. If Party B disseminates and disseminates reactionary, pornographic or other information in violation of national law on Party A 's website, Party A' s system records may serve as evidence of Party B 's violation of the law.</p>
+				<p>11th,Protection</p>
+				<p class="suojin">Party B agrees to protect and safeguard the interests of all the members of Party A and is responsible for all expenses (including legal fees, attorneys 'fees) incurred by Party B as a result of Party B' s out - of - service use of the Platform and the damages incurred by Party B in violation of the Terms of Service.</p>
+				<p>12th , the end of service</p>
+				<p class="suojin">Party B or Party A may suspend one or more network services at any time according to the actual situation. Party A is not liable to any individual or third party for any reason to interrupt the service. If Party B disagrees with the revised terms or is dissatisfied with Party A 's services, Party B may exercise the following rights:</p>
+				<p class="suojin">1. Stop using Party A's network services.</p>
+				<p class="suojin">2. Party A shall be notified to stop the service to Party B.</p>
+				<p class="suojin">Upon termination of Party B's services, Party B shall immediately terminate its right to use the network services. Since then, Party B has no right, Party A has no obligation to send any unprocessed information or unfinished services to Party B or third parties.</p>
+				<p>13th,Circulars</p>
+				<p class="suojin">All notices sent to Party B can be sent via announcements on important pages or in SMS or regular mail. Changes in the terms of service, service changes, or other important events of the notice will be in this form.</p>
+				<p>14th , the ownership of network services</p>
+				<p class="suojin">The contents of the network services defined by Party A include: text, software, sound, pictures, videos, charts, advertisements, the contents of the e-mail, and Party B's other information. All of this content is protected by copyright, trademark, labeling and other property ownership laws. Therefore, Party B can only use the content under the authorization of Party A and the advertiser, and can not copy, reconstruct or create derivative products related to the content. All articles of Party A shall be owned by the author and Party A, and any other person shall reprint the articles of Party A, and must obtain the authorization from the author or Party A.</p>
+				<p>15th,Rights and Obligations</p>
+				<p class="suojin">Party B as a KDpay partner shall have its rights and obligations in mind:</p>
+				<p class="suojin">1. Party B must have the correct contact telephone number and contact QQ, if the contact changes, please immediately modify its account in the pocket to pay the account information;</p>
+				<p class="suojin">2. Party B must be responsible for the goods sold, if the goods have a useful life or other special needs, it must be in the commodity information and trade names and other prominent position in the note, not to mislead pockets to pay;</p>
+				<p class="suojin">3. Party B legitimate business, no fraud shall occur, or the KDpay have the right to terminate at any time to provide services to the Party B, and retain the right to pursue legal responsibility;</p>
+				<p class="suojin">4. Party B shall not lend the account to another person for use, otherwise the consequences, including possible legal disputes arising from Party B's own responsibility;</p>
+				<p class="suojin">5. Party B shall not infringe upon the property rights of any third party, or copyright, patent, trademark, trade secret or other intellectual property rights, or privacy or reputation;</p>
+				<p class="suojin">6. Party B has the right to participate in KDpay related activities, but KDpay will retain the final interpretation of the activities.</p>
+				<p class="suojin">Party B's terms of service to be consistent with the legal interpretation of the People's Republic of China, Party B and Party A agreed to submit to the jurisdiction of the people's court. In the event that the terms of service of Party A conflict with the laws of the People's Republic of China, these terms will be fully re-interpreted in accordance with the law, while other provisions are still to maintain legal effect and influence.</p>
+				<p>16th , on account cancellation provisions</p>
+				<p class="suojin">In order to ensure the legitimacy of the account, since the successful registration, the account effective date, if Party B illegal use of the account or illegal operation, Party A has the right to stop or delete the account, and reserves the final interpretation and The right to pursue legal responsibility.</p>
+				<p class="suojin">The above provisions of the interpretation of the right to Chongqing Duqi Technology Co., Ltd. all.</p>
+				<p>&nbsp;</p>
+				<p>Note: Party B shall be responsible for the authenticity and legality of the information provided by Party B. If the information provided by Party B leads to the infringement of Party A 's relevant rights and interests, Party B shall bear all the liability for the loss suffered by Party A.</p>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" language="javascript" src="/Scripts/jquery/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript" src="/Scripts/custom/noname.js"></script>
+	<script type="text/javascript" src="/Scripts/jquery/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="/international/js/validate.js"></script>
+	<script type="text/javascript" src="/international/js/register.js?t=10"></script>
+	<script>
+		$(function(){
+		    $('.buoy').animate({ 'left': '135px'}, 200);
+			var $lis = $('.nav>li'), $h = $('.buoy')
+	            $lis.hover(function () {
+	                $h.stop().animate({
+	                    'left': $(this).offsetParent().context.offsetLeft
+	                }, 200);
+	            }, function () {
+	                $h.stop().animate({
+	                    'left': '135px'
+	                }, 200);
+	            })
+			})
+		var context_path = '';
+		var msg = '<%=message%>';
+		if(msg != ""){
+			alert(msg);
+		}
+		$(function(){
+			$(".choosebox li").click(function(){
+				var $this=$(this);
+				var id=$this.prop("id");
+				//console.log(id);
+				if(id=="c2"){
+					//alert("ddd");
+					$(".choosebox li").removeClass("p-selected");
+					$this.addClass("c-selected");
+					$("#userclass").val(1);
+					
+				}else{
+					$(".choosebox li").removeClass("c-selected");
+					$this.addClass("p-selected");
+					$("#userclass").val(0);
+					
+				}
+				
+				
+			})
+		});
+		function openProtocol(){
+			$("#cache-config").show();
+		    $("#sd_overlay").show();
+		}
+		function closeProtocol(){
+			$("#cache-config").hide();
+			$("#sd_overlay").hide();
+		}
+		$("#agreenProtocol").click(function(){
+			if(document.getElementById("agreenProtocol").checked) {
+				$("#register-btn").removeClass("noRegister");
+				$("#register-btn").addClass("agreenRegister");
+				$("#register-btn").attr({"disabled":false});
+			}else{
+				$("#register-btn").removeClass("agreenRegister");
+				$("#register-btn").addClass("noRegister");
+				$("#register-btn").attr({"disabled":true});
+				
+			}
+		});
+	</script>
+</html>

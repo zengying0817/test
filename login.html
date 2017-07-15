@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>登录</title>
+
+	<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+	<link rel="stylesheet" type="text/css" href="css/login.css"/>
+	<style>
+			ul.nav li a{
+				color: #fff;
+			}
+			.buoy{
+				background: #413535;
+			}
+	</style>
+	
+	<script type="text/javascript" src="js/jquery-1.11.3.min.js" ></script>
+	<script type="text/javascript" src="js/index.js" ></script>
+	<script type="text/javascript" src="js/nicenav.js" ></script>
+	<script type="text/javascript" src="js/supersized.3.2.7.min.js" ></script>
+	<script type="text/javascript" src="js/scripts.js" ></script>
+	<script type="text/javascript" src="js/supersized-init.js" ></script>
+	
+<script type="text/javascript" src="/Scripts/secure/RSA.js"></script>
+<script type="text/javascript" src="/Scripts/secure/BigInt.js"></script>
+<script type="text/javascript" src="/Scripts/secure/Barrett.js"></script>
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+<script type="text/javascript">
+    function rsapassword(password) {
+        setMaxDigits(1024);
+        key = new RSAKeyPair("<%=strPublicKeyExponent%>", "", "<%=strPublicKeyModulus%>");
+        var encpassword = encryptedString(key, encodeURIComponent(password));
+        return encpassword;
+    }
+</script>
+    <script type="text/javascript" src="/Scripts/custom/noname.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+    	$.nicenav(200,0);
+        var abortlogin = '';
+        if (abortlogin === "true") {
+            $("#abortmsg,#zhezhao").show();
+        } else {
+            if (msg != "") {
+                alert(msg);
+            }
+        }
+        $("#close").click(function () {
+            $("#abortmsg,#zhezhao").hide();
+            window.location.href = "/login.aspx";
+        });
+
+        $("#login_user").val("");
+        $("#login_pwd").val("");
+        $("#captchacode").val("");
+
+    });
+
+//  function refreshcaptchacode() {
+//      $("#cimg").attr("src", "/captchacode.ashx?date=" + new Date());
+//  }
+    function doSubmit1() {
+        var $login_user = $("#login_user");
+        if ($login_user.val() == "") {
+            alert("username can't be none!");
+            $login_user.focus();
+            return false;
+        }
+        var $login_pwd = $("#login_pwd");
+        if ($login_pwd.val() == "") {
+            alert("password can't be none!");
+            $login_pwd.focus();
+            return false;
+        }
+        if ($("#captchacode").val() == "") {
+            alert("Verification code can't be none!");
+            $("#captchacode").focus();
+            return false;
+        }
+        var password = $login_pwd.val();
+        if (password.length > 32) {
+            alert("password is not correct!");
+            $login_pwd.focus();
+            return false;
+        }
+//      ajaxreq({
+//          type: "get",
+//          url: "/user/getrandomstring.ashx",
+//          success: function (json) {
+//		console.log(json);
+//              var randomstring = json.msg;
+//              var encpassword = rsapassword($("#login_pwd").val() + randomstring);
+//              $("#login_pwd").val(encpassword);
+//              $("#loginForm").submit();
+//          },
+//          error: function () {
+//          }
+        });
+    }
+
+    function OrderieHandler(event) {
+        event = event ? event : (window.event ? window.event : null);
+        if (event.keyCode == 13 || event.which == 13) {
+            $("#login_submit").click();
+        }
+    }
+
+</script>
+</head>
+<body>
+<!--nav-->
+			<!--<div class="nav-box clearfix">
+				<a href="/international/Default.aspx">
+					<img src="img/kd-logo.png" class="fl"/>
+				</a>
+			    <div class="pr navlineBox fr">
+				<ul class="nav fr">
+					<li><a href="login.aspx" class="navtop_active">登录</a></li>
+					<li><a href="Register.aspx">注册</a></li>
+					<li><a href="Default.aspx">首页</a></li>
+				</ul>
+				<div class="buoy"></div>
+				</div>
+			</div>-->
+
+			<div class="warp clear page-container">
+				<div class="w_loginBox" id="w_loginBox">
+					<h1>登录</h1>
+					<form name='loginForm' id='loginForm' onkeydown="OrderieHandler(event)" method="post" action="/user/login.aspx">
+					<input type="hidden" id="validphone" name="validphone" value="" />
+				<div class="login_line l1 clearfix">
+					<input name="login_user" id="login_user" type="text" class="login_line_input u_name left username"  placeholder="请输入账号"/>
+				</div>
+				<div class="login_line l2 clearfix">
+					<input name="login_pwd" id="login_pwd" type="password" class="login_line_input u_pwd left password"  placeholder="请输入密码"/>
+				</div>
+				<div class="login_line l2 clearfix">
+					<a href="javascript:void(0);" class="login_submit_bottom" name="login_submit" id="login_submit" onclick="doSubmit1()">登录</a>
+				</div>
+				 <input id="userId" name="userId" type="hidden" value=""/>
+        			 <input type="hidden" id="tuijianid" name="tuijianid" value=""/>
+				</form>
+				</div>
+			</div>
+
+
+</body>
+</html>
+
+<ul id="supersized" class="quality" style="visibility: visible;">
+	<li class="slide-0 prevslide" style="visibility: visible; opacity: 1;">
+		<!--<a target="_blank"><img src="img/1.jpg" style="width: 1322.86px; left: -58.5px; top: 0px; height: 926px;"></a>-->
+	</li>
+	<li class="slide-1 activeslide" style="visibility: visible; opacity: 1;">
+		<!--<a target="_blank"><img src="img/2.jpg" style="width: 1322.86px; height: 926px; left: -58.5px; top: 0px;"></a>-->
+	</li>
+	<li class="slide-2" style="visibility: visible; opacity: 1;">
+		<!--<a target="_blank"><img src="img/3.jpg" style="width: 1382.09px; left: -88px; top: 0px; height: 926px;"></a>-->
+	</li>
+</ul>
+</body>
+
+</html>

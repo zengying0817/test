@@ -1,0 +1,332 @@
+
+.register-box{
+	margin-top: 180px;
+	min-width: 1200px;
+	width: 100%;
+	min-height: 300px;
+}
+.register-content{
+	margin: 0 auto;
+    	height: 100%;
+   	width: 800px;
+}
+ul.choosebox{
+	width: 100%;
+	height: 60px;
+	text-align: center;
+	color: 2d2929;
+	background-color: #FFFFFF;
+	font-size: 28px;
+	box-shadow: 4px 5px 4px 0px #d7d7d7;
+}
+.choosebox li{
+	float: left;
+	width: 50%;
+	height: 100%;
+	line-height: 60px;
+	overflow: hidden;
+	cursor: pointer;
+}
+.choosebox li.c-selected{
+	background-color: #5ea6e3;
+	color: #FFFFFF;
+}
+.choosebox li.p-selected{
+	background-color: #E79E1A;
+	color: #FFFFFF;
+}
+.registerform{
+	width: 600px;
+	margin: 0 auto;
+	height: 100%;
+}
+.register-con-left{
+    position: relative;
+    width: 600px;
+    height: auto;
+    overflow: hidden;
+    margin-top: 50px;
+    float: left;
+}
+.register-text-two {
+    width: 100%;
+    height: 25px;
+    float: left;
+}
+.register-text-two .p1 {
+    width: 155px;
+    height: 25px;
+    line-height: 25px;
+    float: left;
+    text-align: right;
+    color: #666666;
+}
+.register-text-two .p2 {
+    width: 230px;
+    height: 25px;
+    line-height: 25px;
+    float: left;
+    font-size: 12px;
+    color: #ed461f;
+    margin-left: 4px;
+}
+.register-text-two .p3 {
+    width: 190px;
+    height: 25px;
+    font-size: 12px;
+    margin-left: 8px;
+    line-height: 25px;
+    float: left;
+    color: #666666;
+}
+
+.register-text-one {
+    width: 100%;
+    height: 35px;
+    float: left;
+}
+.register-type {
+    position: absolute;
+    width: 600px;
+    height: 35px;
+}
+.register-text-one .p1 {
+    font-size:15px;
+    width: 155px;
+    height: 35px;
+    line-height: 35px;
+    float: left;
+    text-align: right;
+    color: #666666;
+}
+.register-text-one .p2 {
+    width: 230px;
+    overflow: hidden;
+    height: 35px;
+    line-height: 35px;
+    float: left;
+    margin-left: 4px;
+    color: #666666;
+}
+.register-text-one .p2 input {
+    width: 95%;
+    height: 33px;
+    line-height: 33px;
+    border: #cccccc 1px solid;
+    float: left;
+    margin-left: 0px;
+    color: #666666;
+    font-size: 14px;
+}
+.register-text-one .p3 {
+    width: 160px;
+    height: 35px;
+    font-size: 12px;
+    margin-left: 8px;
+    line-height: 35px;
+    float: left;
+    color: #666666;
+}
+.register-text-one .p3 img {
+    display: none;
+}
+.register-text-one .p3 a {
+    color: #1e99e9;
+}
+
+.register-text-one .p2 input.valid {
+    border: #7bb063 1px solid;
+}
+.register-text-one .p2 input.error {
+    border: red 1px solid;
+}
+.r_line_checkbox{
+	width: 100%;
+	height: 25px;
+	float: left;
+	margin-bottom: 30px;
+	margin-top: 10px;
+}
+#agreenProtocol {
+    margin-left: 138px;
+    width: 13px;
+}
+.r_line_checkbox .line_checkbox {
+    height: 14px;
+    vertical-align: middle;
+}
+.r_line_checkbox a {
+    font-size: 12px;
+    color: #a2a2a2;
+}
+.r_line_checkbox a:hover {
+    color: #FF0000;
+    text-decoration: underline;
+}
+.register-text-one .p3 .send-smscode {
+    width: 90px;
+    height: 33px;
+    float: left;
+    line-height: 33px;
+    text-align: center;
+    background-color: #E79E1A;
+    color: #ffffff;
+    cursor: pointer;
+    margin-left: 10px;
+    border: none;
+    text-indent: 0px;
+    font-size: 13px;
+    border-radius: 5px;
+}
+.send-smscode-disabled {
+    width: 90px;
+    height: 33px;
+    float: left;
+    line-height: 33px;
+    text-align: center;
+    background-color: #666666;
+    color: #ffffff;
+    cursor: pointer;
+    margin-left: 10px;
+    border-radius: 5px;
+    border: none;
+    text-indent: 0px;
+    font-size:12px;
+}
+.btn {
+    /* margin-left: 19px; */
+    width: 350px;
+    height: 63px;
+    line-height: 63px;
+    vertical-align: middle;
+    text-align: center;
+    letter-spacing: 2px;
+    font-size: 26px;
+    border: 0px;
+    border-radius: 5px;
+    margin: 0 auto;
+    display: block;
+}
+.agreenRegister {
+    background-color: #5ea6e3;
+    color: white;   
+}
+.noRegister {
+    background-color: gainsboro;
+    color: gray;
+    border-radius: 5px;
+    margin: 0 auto;
+    display: block;
+}
+#sd_overlay {
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+    display: none;
+}
+.sd_overlayBG {
+    background: gray;
+    opacity: 0.45;
+    filter: alpha(opacity=45);
+    _background: none;
+}
+.myweb_msg-cache {
+    position: absolute;
+    padding-top: 24px;
+    width: 1068px;
+    height: 750px;
+    top: 45%;
+    left: 50%;
+    margin-top: -330px;
+    margin-left: -534px;
+    overflow: hidden;
+    text-align: left;
+    z-index: 1000;
+    display: none;
+}
+.ks-overlay-close {
+    display: block;
+    zoom: 1;
+    width: 24px;
+    height: 24px;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 24px;
+    color: #ddd;
+    text-decoration: none;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+.msg_content {
+    background: white;
+    overflow: auto;
+    width: 100%;
+    height: 100%;
+}
+.myweb_msg-cache p {
+    color: #999999;
+    width: 1000px;
+    margin: 0 auto;
+    font-size: 12px;
+    line-height: 20px;
+}
+.myweb_msg-cache .suojin {
+    text-indent: 25px;
+}
+.register-text-three {
+    width: 100%;
+    height: 25px;
+}
+.register-text-three .p1 {
+    width: 155px;
+    height: 25px;
+    line-height: 25px;
+    float: left;
+    text-align: right;
+    color: #666666;
+}
+.register-text-three .p2 {
+    width: 280px;
+    height: 25px;
+    line-height: 25px;
+    float: left;
+    font-size: 12px;
+    color: #ed461f;
+    margin-left: 4px;
+}
+.register-text-three .p3 {
+    width: 140px;
+    height: 25px;
+    font-size: 12px;
+    margin-left: 8px;
+    line-height: 25px;
+    float: left;
+    color: #666666;
+}
+.register-text-three .p2 span.weak {
+    background-color: #ff1515;
+}
+.register-text-three .p2 span {
+    color: #ffffff;
+    border-right: 1px solid #FFF;
+    float: left;
+    height: 18px;
+    line-height: 18px;
+    width: 54px;
+    background-color: #e7e7e7;
+    text-align: center;
+}
+.register-text-three .p2 span.default {
+    background-color: #e7e7e7;
+}
+.register-text-three .p2 span.normal {
+    background-color: #ff9b00;
+}
+.register-text-three .p2 span.safety {
+    background-color: #1FBE0F;
+}

@@ -1,0 +1,41 @@
+html{
+	width: 100%;
+	height: 100%;
+}
+body{
+	background: white;
+	overflow-x: hidden;
+	background: url(../img/success_bg.jpg) no-repeat;
+}
+.bg{
+	margin-top: 200px;
+	width: 100%;
+	height: auto;
+}
+.success-box{
+	margin: 0 auto;
+	width: 828px;
+	height: 525px;
+	background: url(../img/success_box.jpg) no-repeat;
+}
+.button-box{
+	float: left;
+	width: 376px;
+	height: 60px;
+	margin-left: 324px;
+	margin-top: 278px;
+	/*background: green;*/
+}
+.button-box a{
+	float: left;
+	display: block;
+	width: 153px;
+	height: 52px;
+	background: url(../img/button_bg.png) 0px 0px no-repeat;
+	line-height: 45px;
+	text-align: center;
+	color: #FFFFFF;
+}
+.button-box a:hover{
+	background-position: 0 -82px;
+}

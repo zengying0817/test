@@ -1,0 +1,38 @@
+.Hamburge-menu {
+    display: block;
+}
+ul.nav,
+.buoy{
+	display: none;
+}
+.nav-box {
+    margin-top: 10px;
+}
+.wrapper {
+    width: 90%;
+}
+.content h1 {
+    font-size: 24px;
+    line-height: 70px;
+}
+.content p {
+    line-height: 20px;
+    font-size: 14px;
+}
+.content {
+    margin-top: 60px;
+}
+ul.kd-btn {
+    width: 80%;
+    margin: 70px auto;
+}
+ul.kd-btn li {
+    height: 30px;
+    line-height: 30px;
+    width: 40%;
+}
+.sidemenu,
+.sidemenu .green{
+    width: 200px;
+    font-size: 14px;
+}

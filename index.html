@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!--<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>-->
+		<meta charset="utf-8" />
+		<title>口袋支付</title>
+		<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+        <link rel="stylesheet" type="text/css" href="css/css.css"/>
+		<!--<link href="css/small_phone.css" rel="stylesheet" type="text/css" media="(max-width:320px)"/>
+		<link href="css/mid_phone.css" rel="stylesheet" type="text/css" media="(min-width:321px) and (max-width:640px)"/>
+		<link href="css/ipad.css" rel="stylesheet" type="text/css" media="(min-width:641px) and (max-width:1199px)"/>-->
+		<script type="text/javascript" src="js/jquery-1.11.3.min.js" ></script>
+		<script type="text/javascript" src="js/index.js" ></script>
+		<script type="text/javascript" src="js/nicenav.js" ></script>
+		<script>
+		$(function(){
+			$.nicenav(200);
+		})
+			
+		</script>
+		<style>
+			.nav-box ul.nav li a {
+    				color: white;
+				}
+		</style>
+	</head>
+	<body class="all-screen">
+		<video class="video" id="kd_video" autoplay loop>
+			<source id="mp4" src="https://statics.duqee.com/international/kdvideo.mp4 " type="video/mp4"></source>
+			
+			Your browser does not support the video tag.
+		</video>
+		<div class="wrapper colorwhite pr" style="z-index: 99;">
+			<!--目录-->
+			<header class="nav-box clearfix">
+				<img src="img/kd-logo.png" class="fl"/>
+				<div class="Hamburge-menu fr">
+					<div class="Hamburge-menu-icon"></div>
+					<div class="Hamburge-menu-icon"></div>
+					<div class="Hamburge-menu-icon"></div>
+			    </div>
+			    <div class="pr navlineBox fr">
+				<ul class="nav fr">
+					<li><a href="index.html">Home</a></li>
+					<li><a href="product_center.html">Product center </a></li>
+					<li><a href="about-us.html">About us</a></li>
+					<li><a href="javascript:void(0)">Contact us</a></li>
+				</ul>
+				<div id="buoy" class="buoy"></div>
+				</div>
+			</header>
+			<!--<div class="sidemenu">
+			<div class="green">x</div>
+			
+				<ul class="hide-nav">
+					<li><a href="#" class="nav_active">Home</a></li>
+					<li><a href="#">Product center</a></li>
+					<li><a href="about-us.html">About us</a></li>
+					<li><a href="#">Contact us</a></li>
+				 </ul>
+			
+		</div>-->
+			<!--内容-->
+			<div class="content tc">
+				<h1>Welcome to</h1>
+				<p>Build first-class enterprise tree first-class reputation </p>
+				<p>and first-class service with first-class project </p>
+				<p>Come on come on come on</p>
+				<ul class="kd-btn clearfix">
+					<li class="login-btn fl">
+                        <span class="line line-top"></span>
+                        <span class="line line-right"></span>
+                        <span class="line line-bottom"></span>
+                        <span class="line line-left"></span>
+                        Login
+                    </li>
+					<li class="register-btn fr">
+                    	<span class="line line-top"></span>
+                        <span class="line line-right"></span>
+                        <span class="line line-bottom"></span>
+                        <span class="line line-left"></span>
+                    	Registered
+                    </li>
+				</ul>
+			</div>
+			<!--登陆框-->
+			<div class="login-box tc">
+				<span class="closebtn">×</span>
+				<h2>Log in the kdpay</h2>
+				<div class="myInput mt13 h74">
+					<input type="text" class="login-usrname" id="login_user" />
+				</div>
+				<div class="myInput mypassword mt50 h74">
+					<input type="password" class="login-passwd" id="login_passwd" />
+				</div>
+                <div class="myInput mypassword mt50 h74">
+					<input type="password" class="login-passwd" id="login_passwd" />
+				</div>
+				<a class="forgetPasswd"  href="findPwd.html">
+					Forgot password？
+				</a>
+				<a href="javascript:void(0)" class="login">login</a>
+			</div>
+		</div>
+	</body>
+</html>
